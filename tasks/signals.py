@@ -22,7 +22,7 @@ def task_cats_delete(instance, **kwargs):
         cat.save()
 
 @receiver(post_save, sender=TodoItem)
-def task_prior_count(instance, **kwargs):
+def task_prior_count(**kwargs):
     for pr in Priority.objects.all():
         pr.todos_count = TodoItem.objects.filter(prior=pr).all().count()
         pr.save()
