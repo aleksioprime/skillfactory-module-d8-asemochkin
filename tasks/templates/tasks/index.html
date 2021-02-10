@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Информация по категориям{% endblock %}
+
+{% block time_content %}
+<div class="alert alert-primary" role="alert" style="margin-top: 20px;"><p>Сегодня: <br>{{date}}</p></div>
+
+{% endblock %}
+
+{% block main_content %}
+<h1>Счётчики категорий и приоритетов</h1>
+<br>
+<h4>Категории</h4>
+<ul>
+  {% for cat, count in counts_cat.items %}
+  <li><span class="badge badge-info">{{ cat }}: {{ count }}</span></li>
+  {% empty %}
+  <li>Список задач по категориям пуст. Попробуйте добавить их из админки</li>
+  {% endfor %}
+</ul>
+<h4>Приоритеты</h4>
+<ul>
+  {% for pr, count in counts_prior.items %}
+  <li><span class="badge badge-info">{{ pr }}: {{ count }}</span></li>
+  {% endfor %}
+
+</ul>
+{% endblock %}
