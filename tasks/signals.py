@@ -1,4 +1,4 @@
-from django.db.models.signals import m2m_changed, pre_delete, post_save
+from django.db.models.signals import m2m_changed, post_delete, pre_delete, post_save
 from django.dispatch import receiver
 from tasks.models import TodoItem, Priority
 
@@ -21,6 +21,7 @@ def task_cats_delete(instance, **kwargs):
         cat.todos_count -= 1
         cat.save()
 
+@receiver(post_delete, sender=TodoItem)
 @receiver(post_save, sender=TodoItem)
 def task_prior_count(**kwargs):
     for pr in Priority.objects.all():
